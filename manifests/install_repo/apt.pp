@@ -22,6 +22,6 @@ class fluentd::install_repo::apt () {
       release     => $::lsbdistcodename,
       repos       => "contrib",
       include_src => false,
-      notify      => Class['::apt::update']
+      notify      => Exec['apt-get_update']
     }
 }
