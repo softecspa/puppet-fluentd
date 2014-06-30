@@ -5,6 +5,11 @@
 #
 class fluentd::install_repo::apt () {
 
+  $location = $::lsbdistcodename? {
+    'precise' => $::lsbdistcodename,
+    'lucid'   => 'debian'
+  }
+
     # Sorry for the different naming of the Rpository between debian and redhat.
     # But I dont want rename it to avoid a duplication.
 
@@ -18,7 +23,7 @@ class fluentd::install_repo::apt () {
     } ->
 
     apt::source { 'treasure-data':
-      location    => "http://packages.treasure-data.com/${::lsbdistcodename}",
+      location    => "http://packages.treasure-data.com/${location}",
       release     => $::lsbdistcodename,
       repos       => "contrib",
       include_src => false,
