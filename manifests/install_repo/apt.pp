@@ -7,7 +7,7 @@ class fluentd::install_repo::apt () {
 
   # Sorry for the different naming of the Rpository between debian and redhat.
   # But I dont want rename it to avoid a duplication.
-  apt_puppetlabs::source { 'treasure-data':
+  apt::source { 'treasure-data':
     location    => "http://packages.treasure-data.com/debian",
     release     => "lucid",
     repos       => "contrib",
@@ -21,6 +21,6 @@ class fluentd::install_repo::apt () {
   exec { "import gpg key Treasure Data":
     command => "/bin/cat /tmp/packages.treasure-data.com.key | apt-key add -",
     unless  => "/usr/bin/apt-key list | grep -q 'Treasure Data'",
-    notify  => Class['::apt_puppetlabs::update'],
+    notify  => Class['::apt::update'],
   }
 }
